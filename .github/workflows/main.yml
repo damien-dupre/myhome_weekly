@@ -25,7 +25,7 @@ jobs:
           R -e 'install.packages("tidyr")'
       
       - name: Scrape
-        run: Rscript weekly_scraper_script.R
+        run: Rscript script.R
       
       - name: Commit and push if it changed
         run: |-
