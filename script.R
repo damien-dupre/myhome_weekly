@@ -7,6 +7,9 @@ library(readr)
 library(tibble)
 library(tidyr)
 
+# options in -------------------------------------------------------------------
+options(encoding = "windows-1252")
+
 # custom functions -------------------------------------------------------------
 n_adds <- function(json){
   requ <- request("https://api.myhome.ie/search") |> 
@@ -40,7 +43,7 @@ df <- c(1080, 887, 618, 737, 1464, 1463, 2013, 2448, 2362, 2414, 2670, 2648, 259
     }}'
   )) |>
   rowwise() |>
-  mutate(n_pages = ceiling(n_adds(json_page)/20))|>
+  mutate(n_pages = ceiling(n_adds(json_page)/20)) |>
   filter(n_pages > 0) |>
   group_by(region_id) |>
   summarise(json_pages = glue(
